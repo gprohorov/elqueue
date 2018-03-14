@@ -1,0 +1,1 @@
+readme.txt in ../resources/public  folder

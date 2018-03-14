@@ -1,14 +1,20 @@
 package com.med.services.patient.Impls;
 
 import com.med.dao.patient.impls.PatientDAOImpl;
-import com.med.model.Patient;
-import com.med.model.Person;
+import com.med.model.*;
+import com.med.services.appointment.impls.AppointmentServiceImpl;
+import com.med.services.doctor.impls.DoctorServiceImpl;
+import com.med.services.events.impls.EventsServiceImpl;
 import com.med.services.patient.interfaces.IPatientsService;
+import com.med.services.procedure.impls.ProcedureServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by george on 3/9/18.
@@ -17,14 +23,37 @@ import java.util.List;
 @Service
 public class PatientServiceImpl implements IPatientsService {
 
-    private List<Patient> patients = new ArrayList<>();
+   // private List<Patient> patients = new ArrayList<>();
+    private List<Doctor> doctors = new ArrayList<>();
+    private List<Procedure> procedures = new ArrayList<>();
+
 
     @Autowired
     PatientDAOImpl patientDAO;
 
+    @Autowired
+    AppointmentServiceImpl appointmentService;
+
+    @Autowired
+    DoctorServiceImpl doctorService;
+
+    @Autowired
+    ProcedureServiceImpl procedureService;
+
+    @Autowired
+    EventsServiceImpl eventsService;
+
+
+
     @Override
     public Patient createPatient(Person person) {
         return patientDAO.createPatient(person);
+    }
+
+    @Override
+    public Patient addPatient(Patient patient) {
+
+        return patientDAO.addPatient(patient);
     }
 
     @Override
@@ -50,7 +79,25 @@ public class PatientServiceImpl implements IPatientsService {
 
     @Override
     public List<Patient> insertAppointedForToday() {
-        return patientDAO.insertAppointedForToday();
+
+        List<Patient> appointed = appointmentService
+                .getAppointmentsByDate(LocalDate.now())
+                .stream().map(appointment -> appointment.getPatient())
+                .collect(Collectors.toList());
+
+           for (Patient patient:appointed){
+
+            patientDAO.addPatient(patient);
+            Event event = new Event(null,
+                   LocalDateTime.now(), patient,
+                   doctorService.getDoctor(0),
+                   procedureService.getProcedure(1),
+                   Action.PUT_IN_QUEUE );
+
+            eventsService.addEvent(event);
+
+        }
+        return appointed;
     }
 
 

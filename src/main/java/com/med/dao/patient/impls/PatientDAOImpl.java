@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,6 +56,12 @@ public class PatientDAOImpl implements IPatientDAO {
     }
 
     @Override
+    public Patient addPatient(Patient patient) {
+        this.patients.add(patient);
+        return patient;
+    }
+
+    @Override
     public Patient updatePatient(Patient patient) {
         int index = patients.indexOf(patient);
         patients.set(index, patient);
@@ -97,12 +102,12 @@ public class PatientDAOImpl implements IPatientDAO {
             Patient patient = appointment.getPatient();
             System.out.println(patient);
             patients.add(patient);
-            Event event = new Event(null,
+  /*          Event event = new Event(null,
                     LocalDateTime.now(),
                     patient, doctors.get(0), procedures.get(1), Action.PUT_IN_QUEUE );
 
             eventsService.addEvent(event);
-
+*/
         }
 
         return patients;

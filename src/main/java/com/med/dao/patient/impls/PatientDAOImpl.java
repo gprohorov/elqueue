@@ -92,22 +92,10 @@ public class PatientDAOImpl implements IPatientDAO {
     @Override
     public List<Patient> insertAppointedForToday() {
 
-/*        System.out.println(appointmentService.getAppointmentsByDate(LocalDate.now()).size());
-        List<Appointment> appointments = appointmentService
-                .getAppointmentsByDate(LocalDate.now());
-        System.out.println(appointments.size());*/
-
         for(Appointment appointment: appointmentService.getAppointmentsByDate(LocalDate.now())){
 
             Patient patient = appointment.getPatient();
-            System.out.println(patient);
             patients.add(patient);
-  /*          Event event = new Event(null,
-                    LocalDateTime.now(),
-                    patient, doctors.get(0), procedures.get(1), Action.PUT_IN_QUEUE );
-
-            eventsService.addEvent(event);
-*/
         }
 
         return patients;

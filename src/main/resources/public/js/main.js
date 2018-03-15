@@ -11,6 +11,13 @@ app.controller("AppCtrl", function($scope, $http){
     });
 
 
+    $scope.patients = [];
+     $http.get('/api/patients/today').then(function (response){
+        $scope.patients=response.data;
+        console.log(response);
+    });
+
+
 
 
 });

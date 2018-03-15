@@ -62,10 +62,10 @@ public class DataStorage {
    );
 
     private List<Appointment> appointments = Arrays.asList(
-            new Appointment(1,  new Patient(persons.get(0)), LocalDate.now().plusDays(1), false),
+            new Appointment(1, new Patient(persons.get(0)), LocalDate.now().plusDays(1), false),
             new Appointment(2, new Patient(persons.get(1)), LocalDate.now(), false),
             new Appointment(3, new Patient(persons.get(2)), LocalDate.now().plusDays(1), false),
-            new Appointment(4, new Patient(persons.get(3)),LocalDate.now(), false)
+            new Appointment(4, new Patient(persons.get(3)), LocalDate.now(), false)
     );
 
     public List<Appointment> getAppointments() {

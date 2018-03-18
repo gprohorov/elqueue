@@ -10,7 +10,7 @@ import java.util.List;
 public class Patient {
    private int id;
    private Person person;
-   private Diagnosis diagnosis;
+   private Therapy diagnosis;
    private LocalDateTime diagnostics;
    private List<Procedure> assignedProcedures;
    private List<Procedure> doneProcedures;
@@ -20,7 +20,7 @@ public class Patient {
    private boolean active;
 
 
-    public Patient(int id, Person person, Diagnosis diagnosis, LocalDateTime diagnostics
+    public Patient(int id, Person person, Therapy diagnosis, LocalDateTime diagnostics
             , List<Procedure> assignedProcedures, List<Procedure> doneProcedures
             , Status status, LocalDateTime minutesInQueue, int balance, boolean active) {
         this.id = id;
@@ -49,7 +49,7 @@ public class Patient {
 
     public Patient(int id,
                    Person person,
-                   Diagnosis diagnosis,
+                   Therapy diagnosis,
                    List<Procedure> assigned,
                    List<Procedure> done,
                    Status status) {
@@ -87,11 +87,11 @@ public class Patient {
         this.person = person;
     }
 
-    public Diagnosis getDiagnosis() {
+    public Therapy getDiagnosis() {
         return diagnosis;
     }
 
-    public void setDiagnosis(Diagnosis diagnosis) {
+    public void setDiagnosis(Therapy diagnosis) {
         this.diagnosis = diagnosis;
     }
 

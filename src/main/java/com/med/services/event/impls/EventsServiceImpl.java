@@ -1,8 +1,8 @@
-package com.med.services.events.impls;
+package com.med.services.event.impls;
 
 import com.med.DataStorage;
 import com.med.model.Event;
-import com.med.services.events.interfaces.IEventsService;
+import com.med.services.event.interfaces.IEventsService;
 import com.med.services.patient.Impls.PatientServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

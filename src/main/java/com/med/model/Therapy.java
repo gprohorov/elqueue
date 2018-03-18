@@ -13,16 +13,26 @@ public class Therapy {
     String diag;
     int codeDiag;
     Map<Procedure, Integer> assignments = new HashMap<>();
+    Map<Procedure, Integer> passed = new HashMap<>();
 
-    public Therapy(int id, LocalDateTime dateTime, String diag, int codeDiag, Map<Procedure, Integer> assignments) {
+    public Therapy(int id, LocalDateTime dateTime, String diag, int codeDiag, Map<Procedure, Integer> assignments, Map<Procedure, Integer> passed) {
         this.id = id;
         this.dateTime = dateTime;
         this.diag = diag;
         this.codeDiag = codeDiag;
         this.assignments = assignments;
+        this.passed = passed;
     }
 
     public Therapy() {
+    }
+
+    public Map<Procedure, Integer> getPassed() {
+        return passed;
+    }
+
+    public void setPassed(Map<Procedure, Integer> passed) {
+        this.passed = passed;
     }
 
     public int getId() {

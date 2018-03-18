@@ -10,35 +10,32 @@ import java.util.List;
 public class Patient {
    private int id;
    private Person person;
-   private Therapy diagnosis;
-   private LocalDateTime diagnostics;
-   private List<Procedure> assignedProcedures;
-   private List<Procedure> doneProcedures;
+   private Therapy therapy;
+   private List<Procedure> assignedProcedures ; // for today
+   private List<Procedure> doneProcedures ;     // for today
    private Status status;
-   private LocalDateTime minutesInQueue;
+   private LocalDateTime lastActivity;
    private int balance;
    private boolean active;
 
 
-    public Patient(int id, Person person, Therapy diagnosis, LocalDateTime diagnostics
+    public Patient(int id, Person person, Therapy therapy
             , List<Procedure> assignedProcedures, List<Procedure> doneProcedures
-            , Status status, LocalDateTime minutesInQueue, int balance, boolean active) {
+            , Status status, LocalDateTime lastActivity, int balance, boolean active) {
         this.id = id;
         this.person = person;
-        this.diagnosis = diagnosis;
-        this.diagnostics = diagnostics;
+        this.therapy = therapy;
         this.assignedProcedures = assignedProcedures;
         this.doneProcedures = doneProcedures;
         this.status = status;
-        this.minutesInQueue = minutesInQueue;
+        this.lastActivity = lastActivity;
         this.balance = balance;
         this.active = active;
     }
 
     public Patient(Person person) {
         this.person = person;
-        this.diagnosis = null;
-        this.diagnostics = null;
+        this.therapy = null;
         this.status = null;
         this.assignedProcedures = new ArrayList<>();
         this.doneProcedures = new ArrayList<>();
@@ -49,18 +46,34 @@ public class Patient {
 
     public Patient(int id,
                    Person person,
-                   Therapy diagnosis,
+                   Therapy therapy,
                    List<Procedure> assigned,
                    List<Procedure> done,
                    Status status) {
         this.id = id;
         this.person = person;
-        this.diagnosis = diagnosis;
+        this.therapy = therapy;
         this.assignedProcedures = assigned;
         this.doneProcedures = done;
         this.status = Status.SOCIAL;
         this.balance = 0;
         this.active =false;
+    }
+
+    public Therapy getTherapy() {
+        return therapy;
+    }
+
+    public void setTherapy(Therapy therapy) {
+        this.therapy = therapy;
+    }
+
+    public LocalDateTime getLastActivity() {
+        return lastActivity;
+    }
+
+    public void setLastActivity(LocalDateTime lastActivity) {
+        this.lastActivity = lastActivity;
     }
 
     public boolean isActive() {
@@ -88,11 +101,11 @@ public class Patient {
     }
 
     public Therapy getDiagnosis() {
-        return diagnosis;
+        return therapy;
     }
 
-    public void setDiagnosis(Therapy diagnosis) {
-        this.diagnosis = diagnosis;
+    public void setDiagnosis(Therapy therapy) {
+        this.therapy = therapy;
     }
 
     public List<Procedure> getAssignedProcedures() {
@@ -119,13 +132,6 @@ public class Patient {
         this.status = status;
     }
 
-    public LocalDateTime getMinutesInQueue() {
-        return minutesInQueue;
-    }
-
-    public void setMinutesInQueue(LocalDateTime minutesInQueue) {
-        this.minutesInQueue = minutesInQueue;
-    }
 
     public int getBalance() {
         return balance;
@@ -140,11 +146,11 @@ public class Patient {
         return "Patient{" +
                 "id=" + id +
                 ", person=" + person +
-                ", diagnosis=" + diagnosis +
+                ", diagnosis=" + therapy +
                 ", assignedProcedures=" + assignedProcedures +
                 ", doneProcedures=" + doneProcedures +
                 ", status=" + status +
-                ", minutesInQueue=" + minutesInQueue +
+                ", minutesInQueue=" + "" +
                 ", balance=" + balance +
                 '}';
     }

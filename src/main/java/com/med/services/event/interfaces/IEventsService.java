@@ -1,4 +1,4 @@
-package com.med.services.events.interfaces;
+package com.med.services.event.interfaces;
 
 import com.med.model.Event;
 

@@ -4,7 +4,7 @@ import com.med.dao.patient.interfaces.IPatientDAO;
 import com.med.model.*;
 import com.med.services.appointment.impls.AppointmentServiceImpl;
 import com.med.services.doctor.impls.DoctorServiceImpl;
-import com.med.services.events.impls.EventsServiceImpl;
+import com.med.services.event.impls.EventsServiceImpl;
 import com.med.services.procedure.impls.ProcedureServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

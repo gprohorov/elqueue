@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,20 +16,20 @@ import java.util.List;
 public class EventDAOImpl implements IEventDAO {
 
 
-    private List<Event> events= new ArrayList<>();
+  //  private List<Event> event= new ArrayList<>();
 
     @Autowired
     DataStorage dataStorage;
 
     @PostConstruct
     void init() {
-         events = dataStorage.getEvents();
+   //      event = dataStorage.getEvents();
     }
 
 
     @Override
     public Event createEvent(Event event) {
-        return null;
+        return event;
     }
 
     @Override
@@ -40,7 +39,7 @@ public class EventDAOImpl implements IEventDAO {
 
     @Override
     public List<Event> getAll() {
-        return null;
+        return dataStorage.getEvents();
     }
 
     @Override

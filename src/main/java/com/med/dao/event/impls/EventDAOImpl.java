@@ -34,6 +34,7 @@ public class EventDAOImpl implements IEventDAO {
 
     @Override
     public Event getEvent(int id) {
+
         return null;
     }
 

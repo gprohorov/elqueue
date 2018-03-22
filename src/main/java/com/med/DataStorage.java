@@ -29,7 +29,8 @@ public class DataStorage {
     List<Person> persons = Arrays.asList(
             new Person(1,"Ivan",  "Ivanov"),
             new Person(2,"Petr",  "Petrov"),
-            new Person(3,"Sidor", "Sidorov"),
+            new Person(3,"Sidor", "Sidorovich",  "Sidorov", "050-0000000", "Herza",
+                    "Holovna str., 5", true, LocalDate.now().minusYears(38).minusDays(20)),
             new Person(4,"Sasha", "Sashin"),
             new Person(5,"vasa",  "vasin"),
             new Person(6,"pasha", "pashin"),
@@ -71,11 +72,12 @@ public class DataStorage {
     );
 
 
-   private List<Event> events = Arrays.asList(
+   private List<Event> events = new ArrayList<>();
+           //Arrays.asList(
           //  new Event(null, LocalDateTime.now(), null, doctors.get(0),procedures.get(0), Action.PRESENT),
          //   new Event(null, LocalDateTime.now(), patient.get(0), doctors.get(0),procedures.get(0), Action.REGISTRATED),
           //  new Event(null, LocalDateTime.now(), patient.get(0), doctors.get(0),procedures.get(0), Action.PUT_IN_QUEUE)
-    );
+
 
 
    Map<Procedure, Integer> assigned = new HashMap<Procedure, Integer>();

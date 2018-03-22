@@ -17,6 +17,12 @@ app.controller("AppCtrl", function($scope, $http){
         console.log(response);
     });
 
+    $scope.persons = [];
+     $http.get('/api/persons').then(function (response){
+        $scope.persons=response.data;
+        console.log(response);
+    });
+
 
 
 

@@ -19,7 +19,7 @@ public class QueueManagerController {
     QueueManagerServiceImpl service;
 
 
-    @RequestMapping("/patients/today")
+    @RequestMapping("/today")
    public List<Patient> includeAppointedPatientsIntoQueue(){
         return service.includeApointed();
     }

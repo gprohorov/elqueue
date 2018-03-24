@@ -5,23 +5,27 @@ import java.time.LocalDate;
 /**
  * Created by george on 3/9/18.
  */
+
+
 public class Appointment {
     private int id;
     private Patient patient;
     private LocalDate date;
-    private boolean proceed;
 
-    public Appointment(int id, Patient patient, LocalDate date, boolean proceed) {
+
+    public Appointment(Patient patient, LocalDate date) {
+        this.patient = patient;
+        this.date = date;
+    }
+
+    public Appointment(int id, Patient patient, LocalDate date) {
         this.id = id;
         this.patient = patient;
         this.date = date;
-        this.proceed = proceed;
     }
 
-    public Appointment() {
-    }
-
-    public int getId() { return id;
+    public int getId() {
+        return id;
     }
 
     public void setId(int id) {
@@ -42,13 +46,5 @@ public class Appointment {
 
     public void setDate(LocalDate date) {
         this.date = date;
-    }
-
-    public boolean isProceed() {
-        return proceed;
-    }
-
-    public void setProceed(boolean proceed) {
-        this.proceed = proceed;
     }
 }

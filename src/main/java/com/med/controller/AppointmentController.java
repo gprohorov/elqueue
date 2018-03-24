@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -23,4 +24,17 @@ public class AppointmentController {
    public List<Appointment> showAllAppointments(){
         return service.getAll();
     }
+
+    @RequestMapping("/appointments/today")
+   public List<Appointment> showTodayAppointments(){
+        return service.getAppointmentsByDate(LocalDate.now());
+    }
+
+    @RequestMapping("/appointments/tomorow")
+   public List<Appointment> TomorowAppointments(){
+        return service.getAppointmentsByDate(LocalDate.now().plusDays(1));
+    }
+
+
+
 }

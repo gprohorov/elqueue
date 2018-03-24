@@ -1,7 +1,10 @@
 package com.med.dao.patient.impls;
 
+import com.med.DataStorage;
 import com.med.dao.patient.interfaces.IPatientDAO;
-import com.med.model.*;
+import com.med.model.Appointment;
+import com.med.model.Patient;
+import com.med.model.Person;
 import com.med.services.appointment.impls.AppointmentServiceImpl;
 import com.med.services.doctor.impls.DoctorServiceImpl;
 import com.med.services.event.impls.EventsServiceImpl;
@@ -11,7 +14,6 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,9 +23,8 @@ import java.util.List;
 public class PatientDAOImpl implements IPatientDAO {
 
 
-    private List<Patient> patients = new ArrayList<>();
-    private List<Doctor> doctors = new ArrayList<>();
-    private List<Procedure> procedures = new ArrayList<>();
+//1 private List<Patient> patients = new LinkedList<>();
+
 
 
     @Autowired
@@ -37,13 +38,14 @@ public class PatientDAOImpl implements IPatientDAO {
 
     @Autowired
     EventsServiceImpl eventsService;
+    
+    @Autowired
+    DataStorage dataStorage;
 
 
     @PostConstruct
     void init(){
-
-        doctors = doctorService.getAll();
-        procedures = procedureService.getAll();
+      //  patients = dataStorage.getPatients();
 
     }
 
@@ -51,41 +53,41 @@ public class PatientDAOImpl implements IPatientDAO {
     @Override
     public Patient createPatient(Person person) {
         Patient patient = new Patient(person);
-        patients.add(patient);
+        dataStorage.getPatients().add(patient);
         return patient;
     }
 
     @Override
     public Patient addPatient(Patient patient) {
-        this.patients.add(patient);
+        dataStorage.getPatients().add(patient);
         return patient;
     }
 
     @Override
     public Patient updatePatient(Patient patient) {
-        int index = patients.indexOf(patient);
-        patients.set(index, patient);
+        int index = dataStorage.getPatients().indexOf(patient);
+        dataStorage.getPatients().set(index, patient);
         return patient;
     }
 
     @Override
     public Patient getPatient(int id) {
-        return patients.stream().filter(patient -> patient.getPerson().getId()==id)
+        return dataStorage.getPatients().stream().filter(patient -> patient.getPerson().getId()==id)
                 .findFirst().orElse(null);
     }
 
     @Override
     public Patient deletePatient(int id) {
-     Patient patient = patients.stream().filter(pat -> pat.getPerson().getId()==id)
+     Patient patient = dataStorage.getPatients().stream().filter(pat -> pat.getPerson().getId()==id)
              .findFirst().orElse(null);
-     int index = patients.indexOf(patient);
-     patients.remove(index);
+     int index = dataStorage.getPatients().indexOf(patient);
+     dataStorage.getPatients().remove(index);
         return null;
     }
 
     @Override
     public List<Patient> getAll() {
-        return patients;
+        return dataStorage.getPatients();
     }
 
 
@@ -95,9 +97,9 @@ public class PatientDAOImpl implements IPatientDAO {
         for(Appointment appointment: appointmentService.getAppointmentsByDate(LocalDate.now())){
 
             Patient patient = appointment.getPatient();
-            patients.add(patient);
+            dataStorage.getPatients().add(patient);
         }
 
-        return patients;
+        return dataStorage.getPatients();
     }
 }

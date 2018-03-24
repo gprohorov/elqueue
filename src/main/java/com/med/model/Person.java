@@ -24,6 +24,7 @@ public class Person {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.gender = true;
     }
 
     public Person(int id, String firstName, String patronymic, String lastName, String cellPhone, String town, String address, boolean gender, LocalDate dateOfBirth) {
@@ -123,5 +124,21 @@ public class Person {
                 ", gender=" + gender +
                 ", dateOfBirth=" + dateOfBirth +
                 '}';
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Person person = (Person) o;
+
+        return getId() == person.getId();
+    }
+
+    @Override
+    public int hashCode() {
+        return getId();
     }
 }

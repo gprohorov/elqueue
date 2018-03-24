@@ -16,4 +16,6 @@ public interface IPatientDAO {
     Patient deletePatient(int id);
     List<Patient> getAll();
     List<Patient> insertAppointedForToday();
+    //List<Patient> getAppointedForDate(LocalDate date);
+
 }

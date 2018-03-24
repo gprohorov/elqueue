@@ -1,7 +1,7 @@
 package com.med.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,54 +10,39 @@ import java.util.List;
 public class Patient {
    private int id;
    private Person person;
+   private LocalDate date;
    private Therapy therapy;
    private List<Procedure> assignedProcedures ; // for today
-   private List<Procedure> doneProcedures ;     // for today
+   private List<Procedure> executedProcedures ;     // for today
    private Status status;
    private LocalDateTime lastActivity;
    private int balance;
-   private boolean active;
+   private Activity active;
 
-
-    public Patient(int id, Person person, Therapy therapy
-            , List<Procedure> assignedProcedures, List<Procedure> doneProcedures
-            , Status status, LocalDateTime lastActivity, int balance, boolean active) {
-        this.id = id;
+    public Patient( Person person, LocalDate date, Therapy therapy, List<Procedure> assignedProcedures, List<Procedure> executedProcedures, Status status, LocalDateTime lastActivity, int balance, Activity active) {
+        this.id = person.getId();
         this.person = person;
+        this.date = date;
         this.therapy = therapy;
         this.assignedProcedures = assignedProcedures;
-        this.doneProcedures = doneProcedures;
+        this.executedProcedures = executedProcedures;
         this.status = status;
         this.lastActivity = lastActivity;
         this.balance = balance;
-        this.active = active;
+        this.active = Activity.NON_ACTIVE;
+    }
+
+    public Patient(Person person, LocalDate date) {
+        this.id = person.getId();
+        this.person = person;
+        this.date = date;
+        this.active = Activity.NON_ACTIVE;
     }
 
     public Patient(Person person) {
+        this.id = person.getId();
         this.person = person;
-        this.therapy = null;
-        this.status = null;
-        this.assignedProcedures = new ArrayList<>();
-        this.doneProcedures = new ArrayList<>();
-        this.balance = 0;
-        this.active =false;
-
-    }
-
-    public Patient(int id,
-                   Person person,
-                   Therapy therapy,
-                   List<Procedure> assigned,
-                   List<Procedure> done,
-                   Status status) {
-        this.id = id;
-        this.person = person;
-        this.therapy = therapy;
-        this.assignedProcedures = assigned;
-        this.doneProcedures = done;
-        this.status = Status.SOCIAL;
-        this.balance = 0;
-        this.active =false;
+        this.active = Activity.NON_ACTIVE;
     }
 
     public Therapy getTherapy() {
@@ -76,13 +61,9 @@ public class Patient {
         this.lastActivity = lastActivity;
     }
 
-    public boolean isActive() {
-        return active;
-    }
+    public Activity getActive() {return active;}
 
-    public void setActive(boolean active) {
-        this.active = active;
-    }
+    public void setActive(Activity active) {this.active = active;}
 
     public int getId() {
         return id;
@@ -117,11 +98,11 @@ public class Patient {
     }
 
     public List<Procedure> getDoneProcedures() {
-        return doneProcedures;
+        return executedProcedures;
     }
 
     public void setDoneProcedures(List<Procedure> doneProcedures) {
-        this.doneProcedures = doneProcedures;
+        this.executedProcedures = doneProcedures;
     }
 
     public Status getStatus() {
@@ -148,10 +129,28 @@ public class Patient {
                 ", person=" + person +
                 ", diagnosis=" + therapy +
                 ", assignedProcedures=" + assignedProcedures +
-                ", doneProcedures=" + doneProcedures +
+                ", executed =" + executedProcedures +
                 ", status=" + status +
                 ", minutesInQueue=" + "" +
                 ", balance=" + balance +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Patient patient = (Patient) o;
+
+        return getPerson().getId() == (patient.getPerson().getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return getPerson().hashCode();
+    }
+
+
+
 }

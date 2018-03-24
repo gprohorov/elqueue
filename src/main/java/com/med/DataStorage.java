@@ -26,16 +26,18 @@ public class DataStorage {
 
     }
 
-    List<Person> persons = Arrays.asList(
+    List<Person> persons = new LinkedList<>( Arrays.asList(
             new Person(1,"Ivan",  "Ivanov"),
             new Person(2,"Petr",  "Petrov"),
-            new Person(3,"Sidor", "Sidorovich",  "Sidorov", "050-0000000", "Herza",
+            new Person(3,"Sidor", "Sidorovich",  "Sidorini", "050-0000000", "Herza",
                     "Holovna str., 5", true, LocalDate.now().minusYears(38).minusDays(20)),
             new Person(4,"Sasha", "Sashin"),
             new Person(5,"vasa",  "vasin"),
             new Person(6,"pasha", "pashin"),
-            new Person(7,"ilia",  "illin")
-    );
+            new Person(7,"ilia",  "illin"),
+            new Person(8,"Barak ",  "Obama"),
+            new Person(9,"Benedict ",  "Ivanov")
+    ));
 
     Procedure registration =   new Procedure(0, "Registration", 0);
     Procedure diagnostics =   new Procedure(1, "Diagnostics", 1);
@@ -82,25 +84,33 @@ public class DataStorage {
 
    Map<Procedure, Integer> assigned = new HashMap<Procedure, Integer>();
    Map<Procedure, Integer> executed = new HashMap<Procedure, Integer>();
+   LocalDate today = LocalDate.now();
 
-   Therapy standard = new Therapy(1, LocalDateTime.now().minusDays(2)
+   Therapy standardTherapy = new Therapy(1, LocalDateTime.now().minusDays(2)
            , "Ушиб", 1, assigned,executed);
 
-    private Patient vasa = new Patient(7, persons.get(4), standard
+    private Patient vasa = new Patient( persons.get(4),today, standardTherapy
             , Collections.emptyList(), Collections.emptyList()
-            , Status.SOCIAL, null, 0, false) ;
-    private List<Patient> patients = Arrays.asList(
+            , Status.SOCIAL, null, 0, Activity.NON_ACTIVE) ;
+
+   private Patient trump = new Patient( persons.get(7),today, standardTherapy
+            , Collections.emptyList(), Collections.emptyList()
+            , Status.SOCIAL, null, 0, Activity.NON_ACTIVE) ;
+
+
+    private List<Patient> patients = new LinkedList<Patient> (Arrays.asList(
+            vasa, trump
             //   new Patient( persons.get(0)),
             //   new Patient( persons.get(2))
-    );
+    ));
 
 
     private List<Appointment> appointments = Arrays.asList(
-            new Appointment(1, new Patient(persons.get(0)), LocalDate.now().plusDays(1), false),
-            new Appointment(2, new Patient(persons.get(1)), LocalDate.now(), false),
-            new Appointment(3, new Patient(persons.get(2)), LocalDate.now().plusDays(1), false),
-            new Appointment(4, new Patient(persons.get(3)), LocalDate.now(), false),
-            new Appointment(5, vasa,                        LocalDate.now(), true)
+            new Appointment(1, new Patient(persons.get(0)), LocalDate.now().plusDays(1)),
+            new Appointment(2, new Patient(persons.get(1)), LocalDate.now()),
+            new Appointment(3, new Patient(persons.get(2)), LocalDate.now().plusDays(1)),
+            new Appointment(4, new Patient(persons.get(3)), LocalDate.now())
+           // , new Appointment(5, vasa,                        LocalDate.now())
     );
 
     public List<Appointment> getAppointments() {

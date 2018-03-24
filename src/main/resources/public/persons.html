@@ -18,6 +18,7 @@
                         <thead>
                         <tr>
 
+                            <th>ID</th>
                             <th>Name</th>
                             <th>Patronymic</th>
                             <th>LastName</th>
@@ -31,18 +32,14 @@
                         <tbody>
 
                         <tr ng-repeat = "item in persons">
+                            <td>{{item.id}}</td>
                             <td>{{item.firstName}}</td>
                             <td>{{item.patronymic}}</td>
                             <td>{{item.lastName}}</td>
                             <td>{{item.town}}</td>
                             <td>{{item.gender}}</td>
                             <td>{{item.dateOfBirth}}</td>
-
-
-
-
-
-
+                            <td><button ng-click="ctrl.delperson(item.id)">DEL</button></td>
                         </tr>
 
                         </tbody>

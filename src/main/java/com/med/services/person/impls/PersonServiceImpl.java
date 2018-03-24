@@ -49,11 +49,16 @@ public class PersonServiceImpl implements IPersonDAO {
 
     @Override
     public Person deletePerson(int id) {
-        return personDAO.getPerson(id);
+        return personDAO.deletePerson(id);
     }
 
     @Override
     public List<Person> getAll() {
         return personDAO.getAll();
+    }
+
+    @Override
+    public List<Person> getPersonListByName(String lastName) {
+        return personDAO.getPersonListByName(lastName);
     }
 }

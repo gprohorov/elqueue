@@ -9,8 +9,15 @@ import java.util.List;
  */
 public interface IPersonDAO {
     Person createPerson(Person person);
+
     Person updatePerson(Person person);
+
     Person getPerson(int id);
+
     Person deletePerson(int id);
+
     List<Person> getAll();
+
+    List<Person> getPersonListByName(String lastName);
+
 }

@@ -55,9 +55,26 @@
   },
   "defaults": {
     "styleExt": "css",
-    "component": {},
-    "serve": {
-        "host": "0.0.0.0"
+    "class": {
+      "spec": false
+    },
+    "component": {
+      "spec": false
+    },
+    "directive": {
+      "spec": false
+    },
+    "guard": {
+      "spec": false
+    },
+    "module": {
+      "spec": false
+    },
+    "pipe": {
+      "spec": false
+    },
+    "service": {
+      "spec": false
     }
   }
 }
